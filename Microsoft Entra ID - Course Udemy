@@ -1,0 +1,538 @@
+portal.azure.com
+
+admin.microsoft.com
+
+entra.microsoft.com
+
+these are the places we can create users, bulk users using a csv downloadable file.
+
+Entra connect which is used for synchronizing the information from on prem to the cloud.
+
+we have users and guests which are used when there is a collab between the companies 
+
+Microsoft IAAS - which has storage, RAM, CPU, Networking 
+
+Microsoft PAAS - which has database, data analytics board, OS
+
+Microsoft SAAS - which includes deployed apps which are ready to use
+
+What is an Active Directory ?
+
+Earlier there was no centralized location to store all computers information. In 1990, the company called Novell introduced client server relationship instead of peer to peer network. So. this networking firm called NetWare manage user logins and permissions. This introduced file server which manages other computers. Then Microsoft came up with idea Domain Controller. In 2000, Microsoft releases its new directory called Active Directory Database Services (ADDS). This is an on prem domain.
+
+Now, we can have redundant domain controllers. If you create a user account on one, another one will replicate the same. The Auth protocol used is Kerberos. Older protocol is NTLM (new technology LAN manager) is used as an auth protocol which used challenge response, less secure. AD uses a language called LDAP (Light weight directory access protocol). All machines need to have a name with a IP - all machines use DNS to identify the resolution. All companies need to have a domain (web presence) and a server is needed to associate the names and ips called DNS server and this need to have a database called DNS database.
+
+1000 computers, all servers, domain controllers, will register in DNS server so that when a computer asks where can i find my domain controller to authenticate myself then DNS will provide the location of DC to the PC to authenticate. This is the central controllers. GPO(Group Policy Objects) used to configure any attributes on machines. 
+
+Internet and the company will be separated by a Firewall. When a person is working from home and he wants to access some servers which are on prem. We shouldn’t open all the ports on the firewall to access all the services which are hosted on prem - so we use VPN or we can setup a RAS server (Remote Access Server) which is a older alternative to VPN which is based on a public phone line. but now we have VPN tunnel using SSL / TLS handshake. What happens when a company is hosting a own web server. So this webserver should not be internal to allow traffic 443, not completely outside, the webserver is all exposed and now people will get another firewall external facing and this is called DMZ called demilitarized zone / perimeter zone. 
+
+Hypervisor -  This is a software which sits in between the OS and the VM and handles everything. Type 1 which is a bare metal hypervisor - runs directly on the core OS. Whereas, type 2 hypervisor runs on the existing VM. In Microsoft, we have Hyper - V ( one machine will virtualize everything). We’ll have checkpoints / snapshots to revert changes. Another advantage is one server can virtualize everything. Another interesting feature is elasticity, they can share memory between servers.
+
+Now with the concept of virtualization, company got to think why these firms use our datacenters to host their VMs. This paved the way for cloud computing. So cloud provider will be offering SAAS, PAAS, and IAAS services for us to use as per many subscriptions. Microsoft IAAS service called Azure. Azure AD called as Entra ID is a PAAS (Microsoft Directory Services) whereas on prem it is called ADDS. Microsoft 365 is mostly sits on Azure - also a SAAS (office 365).
+
+Group Types : Microsoft 365 is the most common group, which has associated with various group. It does not contain devices which will be a part of security group.
+
+We have various groups 
+
+1. Microsoft 365 group - This is the group which is the most common and used for collaboration and sending out emails to all members
+2. Distribution Group - This is the group just used for sending out emails
+3. Mail - Enabled Group - This is the group which is used for sending out emails and optional way of accessing folders
+4. Security Group - This is used to control devices and Users.
+
+Microsoft365 group is basically used for collaboration - opens up email for teams, permissions, Teams & SharePoint, Collab tools, cannot control devices and does not consists of information of devices, which is done by security group.
+
+Distribution Group is used for email broadcast across org
+
+Mail Enabled is used for email and permissions, no Teams and collab is supported.
+
+Security Group is only for permissions.
+
+Assigned Groups and Dynamic Groups.
+
+Assigned - assigned manually - small org
+
+Dynamic - will be added based on rules - large org 
+
+[admin.microoft.com](http://admin.microoft.com) - teams and groups - active teams and groups - teams and Microsoft 365 groups / distribution / security
+M365 - click add - Name and next  - add owner - this user has access teams, add members, group email, chat and other tools, public group / private group - group owners need to add members, create - search for the new group it will show up.
+
+p[ortal.azure.com](http://Azure.portal.com) - whether it is admin, azure, Entra, powershell, azure CLI - all goes into Entra 
+Microsoft Entra id 
+
+groups - create a new group - only 2 groups - Microsoft 365 and security  
+
+Name
+
+Description
+
+Roles
+
+membership - manual or dynamic 
+
+group owner
+
+add dynamic query - based on rules and expressions - properties 
+
+save 
+
+create a group 
+
+All groups - search - manage - members - all members - 15 min 
+
+Security group - create 
+
+Name 
+
+add a dynamic query 
+
+property 
+
+create 
+
+takes at least 5 to 15 min 
+
+BYOD - bring your own device - log using own cred but have restrictions on what they can access - uses Entra id to connect with resources with the org.
+
+how to join a device a new Vm into enta id 
+
+1. loc and keyboard layout 
+2. updates
+3. org ID 
+4. PWD
+5. now checking for auth - now device is joining the org Entra because org ID 
+6. credentials 
+7. settings - signed in as Entra id 
+8. [portal.azure.com](http://portal.azure.com) - Microsoft Entra id - devices - see all devices joined
+9. this is called manual joining 
+10. how to register personal device into entra ID 
+11. accounts - access work or school - entra id - next - cred - sign in 
+12. it takes some time
+13. check under registered devices 
+
+Foundation of PowerShell - 2006 - 2007 server world 
+
+verb noun system 
+
+get - to retrieve
+
+set - alter
+
+remove - delete
+
+start 
+
+stop 
+
+get-services - to show all services
+
+cls
+
+get-tabkey - shows the commands
+
+shift to go backwards
+
+toggle to all commands - arrow keys
+
+also can use parameters
+
+Get-Service -tab through the parameters
+
+enter-pssession -computername server1 - remote in to that computer 
+
+get-process
+
+get-process -computername client10, client11, client 12
+
+outfile - show the data in the text file 
+
+get-process | out-file c:\clientprocess.txt
+
+get-command - all various commands - so many 
+
+get-command -verb get - every command starts with get
+
+get-command -noun *net 
+
+get-command - noun *net*
+
+get-help get-eventlog
+
+get-eventlog -logname System -Newest 5 | format-list - in a list view 
+
+get-eventlog -logname System -Newest 10 | out-file c:\security_log.txt
+
+$computername =”CLIENT10”
+
+get-eventlog -logname system -computername $computername - remote into another computerlogs 
+
+get-executionpolicy 
+
+bypass
+
+set-executionpolicy -executionpolicy bypass/restricted
+
+Microsoft Graph - one gateway for all services - 365, sharepoint, exchange
+
+It is easy for developers and admin to connect to these apps with a single API and with one auth method using OAuth. It is a central way to interact with this.
+
+Installing 
+
+confirm to allow run scripts 
+
+get-executionpolicy - executionpolicy bypass
+
+install-module microsoft.graph -sope currentuser psgallery - force - to the current user 
+
+10 min to complete 
+
+up arrow - microsoft.graph.users
+
+connect-mggraph -scopes *group.readwrite.all, “user.readwrite.all
+
+authenticate - domain username and pwd 
+
+Interact with entra using ms graph 
+
+connect-mggraph -scopes “group.readwrite.all,”user.readwrite.all”
+
+get-mguser -all - all users 
+
+new-mguser -accountenabled:$true -DisplayName *Justin Willams” -mailnickname “justinwilliams” -serprincipalname “justin@exaple.com” - passwordprofile @{ForceChangePasswordNextSignIn =$true; Password = “P@ssword123!!”}
+
+get-mguser -all / also confirm using web 
+
+remove-mguser name 
+
+how to create a bulk of users using powershell 
+
+1. save the info in .txt or excel
+2. cd test 
+3. dir 
+4. check the file
+5. $passwordprofile = @{Password = “password123”; ForceChangePasswordNextSignIn = $true }
+6. import-csv -path “.\users.csv” | forEach-Object { new-mguser -accountenabled:$true -displayname $_.DisplayName -MailNickname $_.MailNickname -userPrincipalName $_.UserPrincipalName -passwordProfile $passwordprofile}
+7. check the users were created in UI - [portal.azure.com](http://portal.azure.com) - entra - users 
+8. similalry we can use a command to remove all the created users 
+
+Associate licenses for users 
+
+get-mguserscubscribedsku
+
+get-mgsubscribedsku | select-object skupartnumber ,skuid ,ConsumedUnits
+
+give license to a user - set-mguserlicense -userid “jc@examlabpractice.com” -addlicenses @{ skuid = “paste the id from the above command”} - removelicenses @()
+
+how to create a group 
+
+new-mggroup -displayname “test m365 group” -mailenabled:$true -MailNickname “testm365” -SecurityEnabled:$false -grouptypes @(”Unified”)
+
+new-mggroup member name - allows to add members to the group 
+
+Roles 
+
+Based on the role of the user 
+
+RBAC 
+ → Azure RBAC roles  - these are the role based access control permission that manage who can access azure resources, what they can do , and at what scope (management, sub, resource grp, resource)
+
+who can access and what they can access 
+
+1. owner - full access
+2. contributor - add to the container
+3. reader - view the data on the resource and not make changes
+4.  custom role - add specific permissions 
+
+they manage scope, In azure, management group - which is a way to group subscriptions - Developers.
+
+resource - resource group - associated with a sub
+
+→ Entra ID roles - also known as Azure AD roles
+
+Roles are given to IT and admins
+
+1. Global Admin - powerful
+2. User - some restrictions
+3. Security - read 
+4. Security admin - manage 
+5. Cloud app - Manage app registrations 
+
+→ Microsoft 365 roles 
+
+Manage services exchange, sharepoint, teams 
+
+1. Global admin - full access
+2. exchange admin - manage mailboxes, transport rules
+3. sharepoint admin 
+4. teams admin
+5. compliance admin 
+
+  Principle of Least Privilege ( Just in TIme ) using PIM (Priv Indentity Manag)
+
+PIM - status - eligible, active, assigned, activated, permanent active, expire active, expire eligible, expire active, JIT, Principle of least privilege
+
+When you want to assign someone access for a limited amount of time
+
+Microsoft 365 - app focused 
+
+Azure - Resource focused 
+
+Entra ID - Identity focused 
+
+[portal.azure.com](http://portal.azure.com) → entra ID → roles and perm
+
+Role is based on role definition and it is a set of permissions given to a group of individuals on the same role 
+
+click on the role - click assignment and select people 
+
+Microsoft 365 - [admin.microsoft.com](http://admin.microsoft.com) - roles - role assign - add 
+
+go to security - permissions - see the permissions based on roles 
+
+Microsoft purview - compliance side of things - settings - role groups 
+
+ How the resources be managed - [portal.azure.com](http://portal.azure.com) - resource - create - IAM - add - roles -view permissions - check access
+
+click add custom role - azure - control pane / data plane 
+
+control - manage sub, per, create
+
+data - what data can be accessed, managed, view
+
+All resources can be sent using an ARM - azure resource manager url - using Rest API 
+
+PIM access - [portal.azure.com](http://portal.azure.com) - all services - search for Privilege Identity - go into it - my roles - see what you have access to 
+
+approve request 
+
+giving access - manage - microsoft entra roles - assign, active, approve, admit
+
+create a user and give him access for 2 days 
+
+Administrative Units
+
+AU - containers in entra used for grouping devices and users.
+
+| Function | Cloud Equivalent | Notes |
+| --- | --- | --- |
+| Organize users/computers | Dynamic / Security Group | Groups are used to logically organize users or devices |
+| Apply policies | Intune / Endpoint Manager | Policies (like blocking USB, enforcing passwords) are applied to groups |
+| Delegate admin rights | Administrative Unit + Role Assignment | AU + Role lets admin manage only scoped users, not everyone |
+
+[portal.azure.com](http://portal.azure.com) - microsoft entra id - all -manage -  roles and assignments 
+
+[admin.microsoft](http://admin.microsoft).com - show all - roles - AU 
+
+[entra.microsoft.com](http://entra.microsoft.com) - identity - AU 
+
+So when adding an user to an AU - we can ensure to select restricted or normal this determines whether a global admin can also be a part of AU or not.
+
+when you add users to AU - that means you are adding people to whom the password can be restted by this AU - a account 
+
+when you login using that AU account and try to reset pwd for all it is not possible - you can only reset to the users that are added to that AU account.
+
+How to syn onsite to the cloud - two types 
+
+1. Entra ID Connect Sync - more auth
+2. Cloud Sync - light weight 
+
+→ Entra ID Connect Sync - on prem to cloud 
+
+Download the wizard on a machine in on prem env - this will control what will sync from onsite to the cloud and not vice versa
+
+Auth methods 
+
+1. Password Hash Sync (PHS) - password will be synced 
+2. Pass through Auth (PTA) - agents on on prem 
+3. Federation with ADFs - complex, and forwards to a server 
+
+1. PHS - the encrypted hash of pwd will be in cloud as well. Security and Compliance will be cons 
+
+2.Pass Through Auth - lighweight agent is on on prem and when working from home, the agent will talk to cloud.
+
+3.Federation and Ping federate - centralized, con is certificate, complex env and compliance env.
+
+4.Enable Single Sign On - automatic logon to cloud
+
+→ Entra Cloud Sync 
+
+no installation 
+
+not complex
+
+no database
+
+lightweight and easy 
+
+go to DC - server manager - tools - AD users and computers 
+
+Create a User 
+
+Download Entra you have to switch off the feature IE Enhanced security conf 
+
+ download the tool using chrome - Download ID fix - install - open the tool - run the query - action - edit and apply - server manager - go back to the user who has the issue in the name that is not supported in the cloud prem
+
+Create a OU - Entra Connect Sync - container - create new user - sales, another user with finance, another user with HR dept 
+
+now we have to sync with cloud with this container 
+
+group - create 
+
+server manager - turn off the IE - web browser - [portal.azure.com](http://portal.azure.com) - Entra - Manage - Entra Connect - get started - manage - download connect sync 
+
+follow the steps - customize the synchronize - install - 2 min - PHS / PTA / Federation / third party / enable single sign on with PHS 
+
+next 
+
+USERNAME - DC username - Primary Domain 
+
+next 
+
+Forest 
+
+add dir - Enterprise domain - name of the domain without domain\administrator
+
+password 
+
+ok
+
+next
+
+you can custom domain name with godaddy and verify 
+
+next
+
+domain and OU filtering 
+
+only sync selected OU 
+
+next 
+
+enable single sign on 
+
+staging server 
+
+install 
+
+5 min 
+
+go to microsoft Entra ID in [portal.azure.com](http://portal.azure.com) - so users will be available which are created on on prem 
+
+entra - hybrid - microsoft entra connect 
+
+Entra Cloud Sync 
+
+create a vm on hyper v 
+
+[portal.azure.com](http://portal.azure.com) - VM - create - resource group - create - go to resource - connect - download RDP file 
+
+now opens Server manager 
+
+local server - IE is off 
+
+manage - add roles and features - next - DC - close 
+
+promote this server as a DC 
+
+next 
+
+point this server to itself for DNS -127.0.0.1
+
+next
+
+summary - validate 
+
+install
+
+10 min 
+
+tools and create OU - put all users you want to sync
+
+entra - connect - get started - manage - cloud sync - download the agent
+
+next - logon and configure service account -  account\whencreatedvmwehavethe name
+
+create 
+
+entra connect - cloud sync - rest of the conn - new conf - AD sync - now the on prem will be listed - create 
+
+scoping - decide - a certain - a Distinguished name - Server manager - AD users and comp - view expand the domain - right click - prop- attribute editor and copy and paste it on that 
+
+now you should see that user 
+
+entra connect health 
+
+health and analytics
+
+watch for domain controllers
+
+event viewer
+
+azure ad connect 
+
+cloud connect 
+
+Managing password settings in Microsoft 365
+
+[admin.microsoft.com](http://admin.microsoft.com) - setting - org setting - security and privacy - password expiration policy - applies to everyone - identities created on cloud 
+
+Hybrid - those will be under the on prem.
+
+[portal.azure.com](http://portal.azure.com) - security - auth and methods - password protection - lock out policy - only on cloud - lock out settings 
+
+SSPR - Self Service Password Reset - by default it is not turned on - [portal.azure.com](http://portal.azure.com) - entra - manage - password reset - certain groups to turn it on 
+
+auth methods - security questions - user should answer some questions 
+
+Access Reviews in Entra ID 
+
+People coming and leaving the company - periodically we should review for the roles and permissions 
+
+[portal.azure.com](http://portal.azure.com) - entra - identity goverance - access review - teams + Groups - create 
+
+MFA - having two or more auth methods 
+
+Something you Know 
+
+Something you have 
+
+Something you are
+
+MFA methods - push notification, SMS, FIDO with NFC, Windows Hello, Temporary Access Pass - TAP 
+
+MFA in Azure, MS, Entra 
+
+[portal.azure.com](http://portal.azure.com) - entra  - properties - security defaults - conditional access - new 
+
+Entra Identity Protection 
+
+SIEM for further identification 
+
+Conditional access
+
+AI 
+
+Risky Sign ins 
+
+Risky Users 
+
+Entra ID protection 
+
+security - identity protection - in azure 
+
+user risk 
+
+sign in risk policy 
+
+Conditional Access - signals on making decisions with users and devices, applications interact 
+
+enforce policies that provides restrictions 
+
+user
+
+ip
+
+device
+
+app
+
+Create - azure - security - conditional access - new - for users and groups
